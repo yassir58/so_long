@@ -1,6 +1,6 @@
 #include "solong.h"
 
-/*
+
 char **extract_map(void)
 {
     int i = 0;
@@ -23,49 +23,58 @@ void process_map(char **map, int *ln, int *en)
     int map_info[2];
 
     while (map[line_number])
+    {
+        printf ("|%s|\n",map[line_number]);
         line_number++;
-    while (map[0][elem_number])
-        elem_number++;
+    }
     *ln = line_number;
-    *en = elem_number;
-}*/
+    *en = ft_strlen(map[0]);
+}
 /*
 int check_for_valid_map(char **map)
 {
 
 }*/
-/*
 
-void draw_map(char **map, void *mlx, void *mlx_win, int i)
+
+void draw_map(t_map map, char **map_tab, t_vars vars)
 {
-    int  j = 0;
-    int x = 0;
-    static int y = 0;
-    int line_number = 0;
-    int element_each = 0;
-    process_map(map, &line_number, &element_each);
-    double rect_width =  WINDOW_WIDTH / element_each;
-    double rect_length = WINDOW_HEIGHT / line_number;
+   int elm_w = ELM_WIDTH; 
+    int elm_h = ELM_WIDTH;
+    int x=0, y=0, i=0, j=0;
+    t_img img;
+    t_img empty_space;
+     t_rect space;
+    space.width  = ELM_WIDTH;
+    space.height = ELM_WIDTH;
+    space.fill_color = 0x00FF0000;
+    space.x = 0;
+    space.y = 0;
 
-        printf("ln %d en %d gw %f gl %f \n",line_number,element_each,rect_width,rect_length);
-    while (map[i][j])
+
+    img.mlx_img = mlx_xpm_file_to_image(vars.mlx, "wall.xpm", &elm_w, &elm_h);
+    img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
+    empty_space.mlx_img = mlx_new_image(vars.mlx,  ELM_WIDTH, ELM_WIDTH);
+    empty_space.addr = mlx_get_data_addr(empty_space.mlx_img, &empty_space.bpp, &empty_space.line_len, &empty_space.endian);
+    put_filled_rect(empty_space, space);
+
+
+    while (map_tab[i])
     {
-        if (map[i][j] == '0')
-            put_filled_rect(mlx, mlx_win, x, y, rect_width, rect_length ,0x0000FFFF);
-        else if (map[i][j] == '1')
-            put_filled_rect(mlx, mlx_win, x, y, rect_width, rect_length ,0x00808080);
-        else if (map[i][j] == 'C')
-               // put_filled_rect(mlx, mlx_win, x, y, rect_width, rect_length ,0x00FFA500);
-            put_circle(mlx, mlx_win, x+ 20,y + 20,15, 0x00FFA500);
-        else if (map[i][j] == 'E')
-            put_filled_rect(mlx, mlx_win, x, y, rect_width, rect_length ,0x00000000);
-        else if (map[i][j] == 'P')
-            put_filled_rect(mlx, mlx_win, x, y, rect_width, rect_length ,0x00964B00);
-        x += rect_width;
-        j++;
-    }
-    y += rect_length;
-    printf("Y : %d\n",y);
-}
+        while (map_tab[i][j])
+        {
+            if (map_tab[i][j] == '1')
+                mlx_put_image_to_window(vars.mlx, vars.win, img.mlx_img,x,y);
+             else if (map_tab[i][j])
+                mlx_put_image_to_window(vars.mlx, vars.win,empty_space.mlx_img,x, y);
 
-*/
+            x += ELM_WIDTH;
+            printf ("x value %d \n",x);
+            j++;
+        }
+        
+        y += ELM_WIDTH;
+        printf ("y value %d \n",y);
+        i++;
+    }
+}
