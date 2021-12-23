@@ -62,10 +62,7 @@ void put_filled_rect(t_img img, t_rect rectangle)
     int i = 0;
     int xv = rectangle.x;
     int yv = rectangle.y;
-    xv++;
-    yv++;
-    rectangle.width--;
-    rectangle.height--;
+    
     while (rectangle.width--)
     {
         while (i < rectangle.height)
@@ -102,13 +99,21 @@ int main()
     int wh = 0, ww = 0;
     int ln= 0;
     int en = 0;
-    char **map_tab = extract_map();
+    printf("test\n");
+   char **map_tab = extract_map();
     process_map(map_tab, &ln , &en);
     ww = ELM_WIDTH * en ;
     wh = ELM_WIDTH * ln;
     printf ("|ww %d| |wh %d|\n", ww, wh);
     
-
+    int row;
+    int column;
+    get_player_position(map_tab, &row, &column);
+    t_player_position pl_ps;
+    pl_ps.row = row;
+    pl_ps.column= column;
+    printf ("row : %d || column : %d\n",row, column);
+    printf ("||%c||\n", map_tab[4][1]);
     map.mlx = vars.mlx;
     map.win = vars.win;
     map.w_width = ww;
@@ -120,8 +125,9 @@ int main()
 
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, ww, wh, "Hello world!");
-    //draw_map(map, map_tab, vars);
+    map_tab[4][2] = 'C';
+    draw_map(map, map_tab, vars);
 	mlx_loop(vars.mlx);
     free(map_tab);
-    free(vars.mlx);
+    //free(vars.mlx);
 }
