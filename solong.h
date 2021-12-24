@@ -86,6 +86,7 @@ typedef struct s_data
 	char **map_tab;
 	t_map map;
 }	t_data;
+
 char	*get_next_line(int fd);
 char	*try_get_line(char *str);
 char	*extract_line(char **buffer, char **backup, char **line_return);
@@ -108,4 +109,6 @@ int move_left(t_data *data);
 int move_right(t_data *data);
 int coin_count(char **map);
 void end_game(t_data *data);
+void init_data(t_data *data, char **map_tab, t_map map);
+void init_map(t_map *map, char **map_tab);
 #endif
