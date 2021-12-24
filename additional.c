@@ -34,21 +34,21 @@ void process_map(char **map, int *ln, int *en)
             line_number++;
         }
         *ln = line_number;
-        *en = ft_strlen(map[0]);
+        *en = ft_strlen(map[0]) - 1;
     }
 }
 
-int check_for_valid_map(char **map)
+/*int check_for_valid_map(char **map)
 {
     int i = 0;
     int j = 0;
 
     
 
-}
+}*/
 
 
-void draw_map(t_map map, char **map_tab, t_vars vars)
+void draw_map(t_data *data)
 {
    int elm_w = ELM_WIDTH; 
     int elm_h = ELM_WIDTH;
@@ -58,6 +58,7 @@ void draw_map(t_map map, char **map_tab, t_vars vars)
     t_img coin;
     t_img empty_space;
     t_rect space;
+    t_img closed_door;
     space.width  = ELM_WIDTH;
     space.height = ELM_WIDTH;
     space.fill_color = 0x00FF0000;
@@ -65,38 +66,40 @@ void draw_map(t_map map, char **map_tab, t_vars vars)
     space.y = 0;
 
 
-    img.mlx_img = mlx_xpm_file_to_image(vars.mlx, "wall.xpm", &elm_w, &elm_h);
+    img.mlx_img = mlx_xpm_file_to_image(data->mlx, "wall.xpm", &elm_w, &elm_h);
     img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
-    empty_space.mlx_img = mlx_new_image(vars.mlx,  ELM_WIDTH, ELM_WIDTH);
+    empty_space.mlx_img = mlx_new_image(data->mlx,  ELM_WIDTH, ELM_WIDTH);
     empty_space.addr = mlx_get_data_addr(empty_space.mlx_img, &empty_space.bpp, &empty_space.line_len, &empty_space.endian);
     put_filled_rect(empty_space, space);
-    monster.mlx_img = mlx_xpm_file_to_image(vars.mlx, "monster.xpm", &elm_w, &elm_h);
+    monster.mlx_img = mlx_xpm_file_to_image(data->mlx, "monster.xpm", &elm_w, &elm_h);
     monster.addr = mlx_get_data_addr(monster.mlx_img, &monster.bpp, &monster.line_len, &monster.endian);
-    coin.mlx_img = mlx_xpm_file_to_image(vars.mlx, "coin.xpm", &elm_w, &elm_h);
+    coin.mlx_img = mlx_xpm_file_to_image(data->mlx, "coin.xpm", &elm_w, &elm_h);
     coin.addr = mlx_get_data_addr(coin.mlx_img, &coin.bpp, &coin.line_len, &coin.endian);
+    closed_door.mlx_img = mlx_xpm_file_to_image(data->mlx, "closed_door.xpm", &elm_w, &elm_h);
+    closed_door.addr = mlx_get_data_addr(closed_door.mlx_img, &closed_door.bpp, &closed_door.line_len, &closed_door.endian);
 
-    while (map_tab[i])
+    while (data->map_tab[i])
     {
-        while (map_tab[i][j])
+        while (j < data->map.element_number)
         {
-            if (map_tab[i][j] == '1')
-                mlx_put_image_to_window(vars.mlx, vars.win, img.mlx_img,x,y);
-            else if (map_tab[i][j] == '0')
-                mlx_put_image_to_window(vars.mlx, vars.win,empty_space.mlx_img,x, y);
-            else if (map_tab[i][j] == 'C')
-                mlx_put_image_to_window(vars.mlx, vars.win,coin.mlx_img,x, y);
-            else if (map_tab[i][j] == 'P')
-                mlx_put_image_to_window(vars.mlx, vars.win,monster.mlx_img,x, y);
+            if (data->map_tab[i][j] == '1')
+                mlx_put_image_to_window(data->mlx, data->win, img.mlx_img,x,y);
+            else if (data->map_tab[i][j] == '0')
+                mlx_put_image_to_window(data->mlx, data->win,empty_space.mlx_img,x, y);
+            else if (data->map_tab[i][j] == 'C')
+                mlx_put_image_to_window(data->mlx, data->win,coin.mlx_img,x, y);
+            else if (data->map_tab[i][j] == 'P')
+                mlx_put_image_to_window(data->mlx, data->win,monster.mlx_img,x, y);
+            else if (data->map_tab[i][j] == 'E')
+                mlx_put_image_to_window(data->mlx, data->win,closed_door.mlx_img,x,y);
 
             x += ELM_WIDTH;
-            printf ("x value %d \n",x);
             j++;
         }
         
         y += ELM_WIDTH;
         j= 0;
         x = 0;
-        printf ("y value %d \n",y);
         i++;
     }
 }

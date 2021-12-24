@@ -1,26 +1,34 @@
-#include "solong"
+#include "solong.h"
 
 
 
-void move_up(t_map map, char **map_tab, t_vars vars, t_player_position pl_ps)
+void move_up(t_data *data)
 {
-    int indx_x = pl_ps.row;
-    int indx_y = pl_ps.column;
-    if (map_tab[indx_x + 1][indx_y] == '0' && (indx_x + 1) <= map.line_number)
-    {
-        map_tab[indx_x][indx_y] = '0';
-        map_tab[indx + 1][indx_x] = 'P';
-    }
-draw_map(map, map_tab, vars);
+     printf ("trying to move up\n");
+    int indx_x = data->map.player_p.row;
+    int indx_y = data->map.player_p.column;
+   if (data->map_tab[indx_x - 1][indx_y] == '0')
+        {
+            printf ("in!@");
+            data->map_tab[indx_x][indx_y] = '0';
+            data->map_tab[indx_x - 1][indx_y] = 'P';
+        }
+    get_player_position(data->map_tab, &indx_x, &indx_y);
+    data->map.player_p.row = indx_x;
+    data->map.player_p.column = indx_y;
 }
-void move_down(t_map map,char **map_tab, t_vars vars, t_player_position pl_ps)
+
+void move_down(t_data *data)
 {
-    int indx_x = pl_ps.row;
-    int indx_y = pl_ps.column;
-    if (map_tab[indx_x - 1][indx_y] == '0' && (indx_x - 1) >= 0)
+    int indx_x = data->map.player_p.row;
+    int indx_y = data->map.player_p.column;
+    if (data->map_tab[indx_x + 1][indx_y] == '0')
     {
-        map_tab[indx_x][indx_y] = '0';
-        map_tab[indx - 1][indx_x] = 'P';
+        data->map_tab[indx_x][indx_y] = '0';
+        data->map_tab[indx_x + 1][indx_y] = 'P';
     }
-draw_map(map, map_tab, vars);
+    get_player_position(data->map_tab, &indx_x, &indx_y);
+    data->map.player_p.row = indx_x;
+    data->map.player_p.column = indx_y;
+
 }

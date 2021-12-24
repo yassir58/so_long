@@ -1,6 +1,6 @@
 NAME=run
 PATH=./minilibx-opengl
-SRC=prog1.c additional.c  get_next_line.c 
+SRC=prog1.c additional.c  get_next_line.c movement.c
 LIB=mlx
 all: $(NAME)
 CC=gcc
