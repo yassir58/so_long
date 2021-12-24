@@ -13,6 +13,15 @@ void	my_mlx_pixel_put(t_img img, int x, int y, int color)
 	dst = img.addr + (y * img.line_len + x * (img.bpp / 8));
 	*(unsigned int*)dst = color;
 }
+int	handle_keypress(int keysym, t_map *map)
+{
+	if (keysym == XK_Escape)
+		mlx_destroy_window(map->mlx, map->win);
+
+	printf("Keypress: %d\n", keysym);
+	return (0);
+}
+
 
 /*
 void	render_background(t_data data, int color)
@@ -127,6 +136,7 @@ int main()
 	vars.win = mlx_new_window(vars.mlx, ww, wh, "Hello world!");
     map_tab[4][2] = 'C';
     draw_map(map, map_tab, vars);
+    mlx_hook(map.win, KeyPress, KeyPressMask, &handle_keypress, &map);
 	mlx_loop(vars.mlx);
     free(map_tab);
     //free(vars.mlx);
