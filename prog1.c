@@ -18,27 +18,19 @@ int	handle_keypress(int keysym, t_data *data)
     {
         if (keysym == XK_Up)
         {
-            test = move_up(data);
-            mlx_clear_window(data->mlx,data->win);
-            draw_map(data);
+            handle_move_up(data);
         }
-        else if (keysym == XK_Down )
+        else if (keysym == XK_Down)
         {
-            test = move_down(data);
-            mlx_clear_window(data->mlx,data->win);
-            draw_map(data); 
+           handle_move_down(data);
         }
         else if (keysym == XK_Left)
         {
-        test =  move_left(data);
-            mlx_clear_window(data->mlx,data->win);
-            draw_map(data);  
+            handle_move_left(data);
         }
         else if (keysym == XK_Right)
         {
-            test = move_right(data);
-            mlx_clear_window(data->mlx,data->win);
-            draw_map(data); 
+           handle_move_right(data);
         }
     }
 	return (0);

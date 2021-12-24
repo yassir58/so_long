@@ -14,10 +14,10 @@
 # define ELM_WIDTH 65
 # define BUFFER_SIZE 1
 # define XK_Escape  53
-# define XK_Left    124  /* Move left, left arrow */
-# define XK_Up      126/* Move up, up arrow */
-# define XK_Right  	123  /* Move right, right arrow */
-# define XK_Down   125  /* Move down, down arrow */
+# define XK_Left    124
+# define XK_Up      126
+# define XK_Right  	123 
+# define XK_Down   125
 # define KeyPressMask (1L<<0)
 # define ButtonPressMask (1L<<2)
 # define KeyPress 02
@@ -111,4 +111,10 @@ int coin_count(char **map);
 void end_game(t_data *data);
 void init_data(t_data *data, char **map_tab, t_map map);
 void init_map(t_map *map, char **map_tab);
+int handle_move_up(t_data *data);
+int handle_move_down(t_data *data);
+int handle_move_left(t_data *data);
+int handle_move_right (t_data *data);
+void init_images(t_img *monster, t_img *empty_space,t_img *coin, t_data *data);
+void init_images_(t_img *wall, t_img *closed_door, t_img *open_door, t_data *data);
 #endif

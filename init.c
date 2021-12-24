@@ -29,3 +29,33 @@ void init_map(t_map *map, char **map_tab)
     map->coin_count = coin_count(map_tab);
 }
 
+void init_images(t_img *monster, t_img *empty_space,t_img *coin, t_data *data)
+{
+    int elm_w = ELM_WIDTH; 
+    int elm_h = ELM_WIDTH;
+    t_rect space;
+    space.width  = ELM_WIDTH;
+    space.height = ELM_WIDTH;
+    space.fill_color = 0x00FF0000;
+    space.x = 0;
+    space.y = 0;
+    monster->mlx_img = mlx_xpm_file_to_image(data->mlx, "monster.xpm", &elm_w, &elm_h);
+    monster->addr = mlx_get_data_addr(monster->mlx_img, &monster->bpp, &monster->line_len, &monster->endian);
+    coin->mlx_img = mlx_xpm_file_to_image(data->mlx, "coin.xpm", &elm_w, &elm_h);
+    coin->addr = mlx_get_data_addr(coin->mlx_img, &coin->bpp, &coin->line_len, &coin->endian);
+    empty_space->mlx_img = mlx_new_image(data->mlx,  ELM_WIDTH, ELM_WIDTH);
+    empty_space->addr = mlx_get_data_addr(empty_space->mlx_img, &empty_space->bpp, &empty_space->line_len, &empty_space->endian);
+    put_filled_rect(*empty_space, space);
+}
+
+void init_images_(t_img *wall, t_img *closed_door, t_img *open_door, t_data *data)
+{
+    int elm_w = ELM_WIDTH; 
+    int elm_h = ELM_WIDTH;
+    wall->mlx_img = mlx_xpm_file_to_image(data->mlx, "wall.xpm", &elm_w, &elm_h);
+    wall->addr = mlx_get_data_addr(wall->mlx_img, &wall->bpp, &wall->line_len, &wall->endian);
+    closed_door->mlx_img = mlx_xpm_file_to_image(data->mlx, "closed_door.xpm", &elm_w, &elm_h);
+    closed_door->addr = mlx_get_data_addr(closed_door->mlx_img, &closed_door->bpp, &closed_door->line_len, &closed_door->endian);
+    open_door->mlx_img = mlx_xpm_file_to_image(data->mlx, "open_door.xpm", &elm_w, &elm_h);
+    open_door->addr = mlx_get_data_addr(open_door->mlx_img, &open_door->bpp, &open_door->line_len, &open_door->endian);
+}

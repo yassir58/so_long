@@ -50,43 +50,22 @@ void process_map(char **map, int *ln, int *en)
 
 void draw_map(t_data *data)
 {
-   int elm_w = ELM_WIDTH; 
-    int elm_h = ELM_WIDTH;
     int x=0, y=0, i=0, j=0;
-    t_img img;
+    t_img wall;
     t_img monster;
     t_img coin;
     t_img empty_space;
-    t_rect space;
     t_img closed_door;
     t_img open_door;
-    space.width  = ELM_WIDTH;
-    space.height = ELM_WIDTH;
-    space.fill_color = 0x00FF0000;
-    space.x = 0;
-    space.y = 0;
-
-
-    img.mlx_img = mlx_xpm_file_to_image(data->mlx, "wall.xpm", &elm_w, &elm_h);
-    img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
-    empty_space.mlx_img = mlx_new_image(data->mlx,  ELM_WIDTH, ELM_WIDTH);
-    empty_space.addr = mlx_get_data_addr(empty_space.mlx_img, &empty_space.bpp, &empty_space.line_len, &empty_space.endian);
-    put_filled_rect(empty_space, space);
-    monster.mlx_img = mlx_xpm_file_to_image(data->mlx, "monster.xpm", &elm_w, &elm_h);
-    monster.addr = mlx_get_data_addr(monster.mlx_img, &monster.bpp, &monster.line_len, &monster.endian);
-    coin.mlx_img = mlx_xpm_file_to_image(data->mlx, "coin.xpm", &elm_w, &elm_h);
-    coin.addr = mlx_get_data_addr(coin.mlx_img, &coin.bpp, &coin.line_len, &coin.endian);
-    closed_door.mlx_img = mlx_xpm_file_to_image(data->mlx, "closed_door.xpm", &elm_w, &elm_h);
-    closed_door.addr = mlx_get_data_addr(closed_door.mlx_img, &closed_door.bpp, &closed_door.line_len, &closed_door.endian);
-    open_door.mlx_img = mlx_xpm_file_to_image(data->mlx, "open_door.xpm", &elm_w, &elm_h);
-    open_door.addr = mlx_get_data_addr(open_door.mlx_img, &open_door.bpp, &open_door.line_len, &open_door.endian);
-
+    
+    init_images(&monster, &empty_space, &coin, data);
+    init_images_(&wall, &closed_door, &open_door, data);
     while (data->map_tab[i])
     {
         while (data->map_tab[i][j])
         {
             if (data->map_tab[i][j] == '1')
-                mlx_put_image_to_window(data->mlx, data->win, img.mlx_img,x,y);
+                mlx_put_image_to_window(data->mlx, data->win, wall.mlx_img,x,y);
             else if (data->map_tab[i][j] == '0')
                 mlx_put_image_to_window(data->mlx, data->win,empty_space.mlx_img,x, y);
             else if (data->map_tab[i][j] == 'C')
@@ -101,7 +80,6 @@ void draw_map(t_data *data)
             x += ELM_WIDTH;
             j++;
         }
-        
         y += ELM_WIDTH;
         j= 0;
         x = 0;
