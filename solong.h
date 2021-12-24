@@ -48,9 +48,12 @@ double height;
 typedef struct s_player_position {
 int row;
 int column;
-int deriction;
-int status;
 } t_player_position;
+
+typedef struct s_door_position {
+int row;
+int column;
+} t_door_position;
 
 typedef struct s_circle {
 
@@ -69,6 +72,8 @@ typedef struct s_map
 	int line_number;
 	int element_number;
 	t_player_position player_p;
+	t_door_position door_p;
+	int coin_count;
 } t_map;
 
 typedef struct s_data
@@ -93,7 +98,11 @@ void draw_map(t_data *data);
 void put_circle(t_data data, t_circle circle);
 void put_filled_rect(t_img img,t_rect rectangle);
 t_img *initialize_img(char c, void *mlx);
-void get_player_position(char **map, int *i, int *j);
+void get_element_position(char **map, int *i, int *j, char c);
 void move_up(t_data *data);
 void move_down(t_data *data);
+void move_left(t_data *data);
+void move_right(t_data *data);
+int coin_count(char **map);
+void end_game(t_data *data);
 #endif

@@ -34,6 +34,18 @@ int	handle_keypress(int keysym, t_data *data)
         mlx_clear_window(data->mlx,data->win);
         draw_map(data); 
     }
+    else if (keysym == XK_Left)
+    {
+        move_left(data);
+        mlx_clear_window(data->mlx,data->win);
+        draw_map(data);  
+    }
+    else if (keysym == XK_Right)
+    {
+        move_right(data);
+        mlx_clear_window(data->mlx,data->win);
+        draw_map(data); 
+    }
 
 	printf("Keypress: %d\n", keysym);
 	return (0);
@@ -80,7 +92,7 @@ int main()
     
     int row;
     int column;
-    get_player_position(map_tab, &row, &column);
+    get_element_position(map_tab, &row, &column,'P');
     t_player_position pl_ps;
     pl_ps.row = row;
     pl_ps.column= column;
@@ -92,13 +104,15 @@ int main()
     map.element_number = en;
     printf ("elem number : %d || line number %d \n", ln, en);
     map.player_p = pl_ps;
+    int n = coin_count(map_tab);
+    map.coin_count = n;
+    printf ("coin count : |%d|\n", n);
     data.map = map;
     data.map_tab = map_tab;
    
 
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, ww, wh, "Hello world!");
-    map_tab[4][2] = 'C';
     draw_map(&data);
     mlx_hook(data.win, KeyPress, KeyPressMask, &handle_keypress, &data);
 	mlx_loop(data.mlx);

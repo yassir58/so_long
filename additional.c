@@ -59,6 +59,7 @@ void draw_map(t_data *data)
     t_img empty_space;
     t_rect space;
     t_img closed_door;
+    t_img open_door;
     space.width  = ELM_WIDTH;
     space.height = ELM_WIDTH;
     space.fill_color = 0x00FF0000;
@@ -77,10 +78,12 @@ void draw_map(t_data *data)
     coin.addr = mlx_get_data_addr(coin.mlx_img, &coin.bpp, &coin.line_len, &coin.endian);
     closed_door.mlx_img = mlx_xpm_file_to_image(data->mlx, "closed_door.xpm", &elm_w, &elm_h);
     closed_door.addr = mlx_get_data_addr(closed_door.mlx_img, &closed_door.bpp, &closed_door.line_len, &closed_door.endian);
+    open_door.mlx_img = mlx_xpm_file_to_image(data->mlx, "open_door.xpm", &elm_w, &elm_h);
+    open_door.addr = mlx_get_data_addr(open_door.mlx_img, &open_door.bpp, &open_door.line_len, &open_door.endian);
 
     while (data->map_tab[i])
     {
-        while (j < data->map.element_number)
+        while (data->map_tab[i][j])
         {
             if (data->map_tab[i][j] == '1')
                 mlx_put_image_to_window(data->mlx, data->win, img.mlx_img,x,y);
@@ -92,6 +95,8 @@ void draw_map(t_data *data)
                 mlx_put_image_to_window(data->mlx, data->win,monster.mlx_img,x, y);
             else if (data->map_tab[i][j] == 'E')
                 mlx_put_image_to_window(data->mlx, data->win,closed_door.mlx_img,x,y);
+            else if (data->map_tab[i][j] == 'O')
+                 mlx_put_image_to_window(data->mlx, data->win,open_door.mlx_img,x,y);
 
             x += ELM_WIDTH;
             j++;
@@ -105,7 +110,7 @@ void draw_map(t_data *data)
 }
 
 
-void get_player_position(char **map, int *i, int *j)
+void get_element_position(char **map, int *i, int *j, char c)
 {
     int in = 0;
     int jn = 0;
@@ -114,7 +119,7 @@ void get_player_position(char **map, int *i, int *j)
          
         while (map[in][jn])
         {
-            if (map[in][jn] == 'P')
+            if (map[in][jn] == c)
             {
                 *i = in;
                 *j = jn;
@@ -124,4 +129,40 @@ void get_player_position(char **map, int *i, int *j)
         jn = 0;
         in++;
     }
+}
+
+
+int coin_count(char **map)
+{
+    int i = 0;
+    int j = 0;
+    int coin_count = 0;
+
+    while (map[i])
+    {
+        while (map[i][j])
+        {
+            if (map[i][j] == 'C')
+                coin_count++;
+
+            j++;
+        }
+        j = 0;
+        i++;
+    }
+    return (coin_count);
+}
+
+
+void end_game(t_data *data)
+{
+    int player_p_row = 0;
+    int player_p_column = 0;
+    int door_p_row = 0;
+    int door_p_column = 0;
+    get_element_position(data->map_tab, &player_p_row, &player_p_column, 'P');
+    get_element_position(data->map_tab, &door_p_row, &door_p_column, 'E');
+    data->map_tab[player_p_row][player_p_column] = '0';
+    data->map_tab[door_p_row][door_p_column] = 'O';
+    //mlx_clear_window(data->mlx,data->win);
 }
