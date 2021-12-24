@@ -1,12 +1,10 @@
 #include "solong.h"
 
-
-
-void move_up(t_data *data)
+int move_up(t_data *data)
 {
     int indx_x = data->map.player_p.row;
     int indx_y = data->map.player_p.column;
-   if (data->map_tab[indx_x - 1][indx_y] == '0')
+    if (data->map_tab[indx_x - 1][indx_y] == '0')
     {
         data->map_tab[indx_x][indx_y] = '0';
         data->map_tab[indx_x - 1][indx_y] = 'P';
@@ -17,14 +15,18 @@ void move_up(t_data *data)
         data->map_tab[indx_x][indx_y] = '0';
         data->map_tab[indx_x - 1][indx_y ] = 'P';
         if (data->map.coin_count == 0)
+        {
             end_game(data);
+            return (TRUE);
+        }
     }
     get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
     data->map.player_p.row = indx_x;
     data->map.player_p.column = indx_y;
+    return (FALSE);
 }
 
-void move_down(t_data *data)
+int move_down(t_data *data)
 {
     int indx_x = data->map.player_p.row;
     int indx_y = data->map.player_p.column;
@@ -39,18 +41,22 @@ void move_down(t_data *data)
         data->map_tab[indx_x][indx_y] = '0';
         data->map_tab[indx_x +1][indx_y] = 'P';
         if (data->map.coin_count == 0)
+        {
             end_game(data);
+            return (TRUE);
+        }
     }
     get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
     data->map.player_p.row = indx_x;
     data->map.player_p.column = indx_y;
-
+    return (FALSE);
 }
-void move_left(t_data *data)
+
+int move_left(t_data *data)
 {
     int indx_x = data->map.player_p.row;
     int indx_y = data->map.player_p.column;
-   if (data->map_tab[indx_x ][indx_y + 1] == '0')
+    if (data->map_tab[indx_x ][indx_y + 1] == '0')
     {
             data->map_tab[indx_x][indx_y] = '0';
             data->map_tab[indx_x ][indx_y + 1] = 'P';
@@ -61,18 +67,22 @@ void move_left(t_data *data)
         data->map_tab[indx_x][indx_y] = '0';
         data->map_tab[indx_x ][indx_y + 1] = 'P';
         if (data->map.coin_count == 0)
+        {
             end_game(data);
+            return (TRUE);
+        }
     }
     get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
     data->map.player_p.row = indx_x;
     data->map.player_p.column = indx_y;
+    return (FALSE);
 }
 
-void move_right(t_data *data)
+int move_right(t_data *data)
 {
     int indx_x = data->map.player_p.row;
     int indx_y = data->map.player_p.column;
-   if (data->map_tab[indx_x ][indx_y - 1] == '0')
+    if (data->map_tab[indx_x ][indx_y - 1] == '0')
     {
         data->map_tab[indx_x][indx_y] = '0';
         data->map_tab[indx_x ][indx_y - 1] = 'P';
@@ -83,9 +93,13 @@ void move_right(t_data *data)
         data->map_tab[indx_x][indx_y] = '0';
         data->map_tab[indx_x ][indx_y - 1] = 'P';
         if (data->map.coin_count == 0)
+        {
             end_game(data);
+            return (TRUE);
+        }
     }
     get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
     data->map.player_p.row = indx_x;
     data->map.player_p.column = indx_y;
+    return (FALSE);
 }

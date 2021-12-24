@@ -164,5 +164,5 @@ void end_game(t_data *data)
     get_element_position(data->map_tab, &door_p_row, &door_p_column, 'E');
     data->map_tab[player_p_row][player_p_column] = '0';
     data->map_tab[door_p_row][door_p_column] = 'O';
-    //mlx_clear_window(data->mlx,data->win);
+    data->map.end_game = TRUE;
 }
