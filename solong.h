@@ -36,34 +36,20 @@ typedef struct s_img
 }	t_img;
 
 
-typedef struct s_rect {
-
-int x;
-int y;
-int fill_color;
-int border_color ;
-double width;
-double height;
-
+typedef struct s_rect 
+{
+	int x;
+	int y;
+	int fill_color;
+	int border_color ;
+	double width;
+	double height;
 }       t_rect;
 
-typedef struct s_player_position {
+typedef struct s_elm_position {
 int row;
 int column;
-} t_player_position;
-
-typedef struct s_door_position {
-int row;
-int column;
-} t_door_position;
-
-typedef struct s_circle {
-
-int x;
-int y;
-int radius;
-int fill_color;
-}       t_circle;
+} t_elm_position;
 
 typedef struct s_map 
 {
@@ -73,10 +59,10 @@ typedef struct s_map
 	int w_height;
 	int line_number;
 	int element_number;
-	t_player_position player_p;
-	t_door_position door_p;
+	t_elm_position player_p;
+	t_elm_position exit_p;
 	int coin_count;
-	int end_game;
+	int game_over;
 } t_map;
 
 typedef struct s_data
@@ -99,7 +85,6 @@ char read_ch(int fd);
 char *put_ch(char *str, char c);
 char *get_next_line(int fd);
 void draw_map(t_data *data);
-void put_circle(t_data data, t_circle circle);
 void put_filled_rect(t_img img,t_rect rectangle);
 t_img *initialize_img(char c, void *mlx);
 void get_element_position(char **map, int *i, int *j, char c);
@@ -111,10 +96,12 @@ int coin_count(char **map);
 void end_game(t_data *data);
 void init_data(t_data *data, char **map_tab, t_map map);
 void init_map(t_map *map, char **map_tab);
-int handle_move_up(t_data *data);
-int handle_move_down(t_data *data);
-int handle_move_left(t_data *data);
-int handle_move_right (t_data *data);
+void handle_move_up(t_data *data);
+void handle_move_down(t_data *data);
+void handle_move_left(t_data *data);
+void handle_move_right (t_data *data);
 void init_images(t_img *monster, t_img *empty_space,t_img *coin, t_data *data);
 void init_images_(t_img *wall, t_img *closed_door, t_img *open_door, t_data *data);
+void display_image(t_data *data, int i, int j, int x, int y);
+void init_enemy(t_img *enemy, t_data *data);
 #endif

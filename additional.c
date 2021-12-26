@@ -3,16 +3,15 @@
 
 char **extract_map(void)
 {
-    int i = 0;
-    char *line = NULL;
+    int i;
+    char *line;
     char **map;
 
+    line = NULL;
+    i = 0;
     map = (char  **)malloc(1000 * sizeof(char *));
     if (!map)
-    {
-        printf ("run out of heap memory\n");
         return (NULL);
-    }
     int fd = open("test.ber", O_RDONLY);
     while ((line = get_next_line(fd)))
         map[i++] = line;
@@ -37,11 +36,34 @@ void process_map(char **map, int *ln, int *en)
         *en = ft_strlen(map[0]) - 1;
     }
 }
-
-/*int check_for_valid_map(char **map)
+/*
+int check_for_valid_map(char **map)
 {
     int i = 0;
     int j = 0;
+    int k = 0;
+
+    while (map[i])
+    {
+        k = ft_strlen(map[i]);
+        if ((map[i][0] == '1' && map[i][k - 1] == '1'))
+            return (0);
+            i++;
+    }
+    while (map[0][j]])
+    {
+        if (map[0][j] != '1')
+            return (0);
+        j++;
+    }
+    j = 0;
+    --i;
+    while (map[i][j])
+    {
+         if (map[0][j] != '1')
+            return (0);
+        j++;
+    }
 
     
 
@@ -51,37 +73,17 @@ void process_map(char **map, int *ln, int *en)
 void draw_map(t_data *data)
 {
     int x=0, y=0, i=0, j=0;
-    t_img wall;
-    t_img monster;
-    t_img coin;
-    t_img empty_space;
-    t_img closed_door;
-    t_img open_door;
-    
-    init_images(&monster, &empty_space, &coin, data);
-    init_images_(&wall, &closed_door, &open_door, data);
+   
     while (data->map_tab[i])
     {
         while (data->map_tab[i][j])
         {
-            if (data->map_tab[i][j] == '1')
-                mlx_put_image_to_window(data->mlx, data->win, wall.mlx_img,x,y);
-            else if (data->map_tab[i][j] == '0')
-                mlx_put_image_to_window(data->mlx, data->win,empty_space.mlx_img,x, y);
-            else if (data->map_tab[i][j] == 'C')
-                mlx_put_image_to_window(data->mlx, data->win,coin.mlx_img,x, y);
-            else if (data->map_tab[i][j] == 'P')
-                mlx_put_image_to_window(data->mlx, data->win,monster.mlx_img,x, y);
-            else if (data->map_tab[i][j] == 'E')
-                mlx_put_image_to_window(data->mlx, data->win,closed_door.mlx_img,x,y);
-            else if (data->map_tab[i][j] == 'O')
-                 mlx_put_image_to_window(data->mlx, data->win,open_door.mlx_img,x,y);
-
+           display_image(data, i, j, x, y);
             x += ELM_WIDTH;
             j++;
         }
         y += ELM_WIDTH;
-        j= 0;
+        j = 0;
         x = 0;
         i++;
     }
@@ -142,5 +144,5 @@ void end_game(t_data *data)
     get_element_position(data->map_tab, &door_p_row, &door_p_column, 'E');
     data->map_tab[player_p_row][player_p_column] = '0';
     data->map_tab[door_p_row][door_p_column] = 'O';
-    data->map.end_game = TRUE;
+    data->map.game_over = TRUE;
 }

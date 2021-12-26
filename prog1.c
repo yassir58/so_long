@@ -11,27 +11,21 @@ void	my_mlx_pixel_put(t_img img, int x, int y, int color)
 
 int	handle_keypress(int keysym, t_data *data)
 {
-    int test = data->map.end_game;
     if (keysym == XK_Escape)
+    {
             mlx_destroy_window(data->mlx, data->win);
-    if (test != TRUE)
+            exit(0);
+    }
+    if (data->map.game_over != TRUE)
     {
         if (keysym == XK_Up)
-        {
             handle_move_up(data);
-        }
         else if (keysym == XK_Down)
-        {
            handle_move_down(data);
-        }
         else if (keysym == XK_Left)
-        {
             handle_move_left(data);
-        }
         else if (keysym == XK_Right)
-        {
            handle_move_right(data);
-        }
     }
 	return (0);
 }

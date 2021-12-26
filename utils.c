@@ -1,9 +1,9 @@
 #include "solong.h"
 
-char read_ch(int fd)
+char    read_ch(int fd)
 {
-    char c_h;
-    int read_return ;
+    char    c_h;
+    int     read_return;
 
     read_return  = 0;
     read_return = read(fd, &c_h, BUFFER_SIZE);
@@ -12,19 +12,17 @@ char read_ch(int fd)
     return (c_h);
 }
 
-
-
-char *put_ch(char *str, char c)
+char    *put_ch(char *str, char c)
 {
-    int len;
-    char *new_str;
-    int i = 0;
+    int     len;
+    char    *new_str;
+    int     i;
 
+    i = 0;
     if (!str)
         return (NULL);
     len =  ft_strlen(str);
     new_str = malloc((len + 2) + sizeof(char));
-
     while (len--)
     {
         new_str[i] = str[i];
@@ -35,41 +33,31 @@ char *put_ch(char *str, char c)
     return (new_str);
 }
 
-char *get_next_line(int fd)
+char    *get_next_line(int fd)
 {
-   static char *backup;
-    char c_h;
-    char *line ;
+    static char     *backup;
+    char            c_h;
+    char            *line ;
 
     line = NULL ;
-     c_h = read_ch(fd);
-
-    
+    c_h = read_ch(fd);
     if (fd == - 1 || (c_h == '\0' && !backup))
         return (NULL);
     if (c_h == '\n')
-    {
-       
+    {   
         if (!backup)
-        backup = ft_strdup("");
+           backup = ft_strdup("");
         line  = put_ch(backup, c_h);
-         free(backup);
-         free(line);
-         backup = NULL ;
+        backup = NULL ;
     }
-    else
+    while (c_h != '\n' && c_h)
     {
-        while (c_h != '\n' && c_h)
-        {
-            if (!backup)
-                backup = ft_strdup("");
-            backup = put_ch(backup, c_h);
-            c_h = read_ch(fd);
-        }
-         line  = put_ch(backup, c_h);
-         free(backup);
-         free(line);
-         backup = NULL ;
+        if (!backup)
+            backup = ft_strdup("");
+        backup = put_ch(backup, c_h);
+        c_h = read_ch(fd);
     }
+    line  = put_ch(backup, c_h);
+    backup = NULL ;
     return (line);
 }

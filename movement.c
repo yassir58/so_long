@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/26 12:31:38 by yelatman          #+#    #+#             */
+/*   Updated: 2021/12/26 19:34:34 by yelatman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "solong.h"
 
 int move_up(t_data *data)
@@ -19,6 +31,12 @@ int move_up(t_data *data)
             end_game(data);
             return (TRUE);
         }
+    }
+    else if (data->map_tab[indx_x - 1][indx_y] == 'I')
+    {
+        data->map_tab[indx_x][indx_y] = '0';
+        printf ("player is dead !\n");
+        return (TRUE);
     }
     get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
     data->map.player_p.row = indx_x;
@@ -46,6 +64,12 @@ int move_down(t_data *data)
             return (TRUE);
         }
     }
+    else if (data->map_tab[indx_x + 1][indx_y] == 'I')
+    {
+        data->map_tab[indx_x][indx_y] = '0';
+        printf ("player_p is dead !\n");
+        return (TRUE);
+    }
     get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
     data->map.player_p.row = indx_x;
     data->map.player_p.column = indx_y;
@@ -72,6 +96,12 @@ int move_left(t_data *data)
             return (TRUE);
         }
     }
+    else if (data->map_tab[indx_x ][indx_y  + 1] == 'I')
+    {
+        data->map_tab[indx_x][indx_y] = '0';
+        printf ("player is dead !\n");
+        return (TRUE);
+    }
     get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
     data->map.player_p.row = indx_x;
     data->map.player_p.column = indx_y;
@@ -97,6 +127,12 @@ int move_right(t_data *data)
             end_game(data);
             return (TRUE);
         }
+    }
+    else if (data->map_tab[indx_x ][indx_y  - 1] == 'I')
+    {
+        data->map_tab[indx_x][indx_y] = '0';
+        printf ("player is dead !\n");
+        return (TRUE);
     }
     get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
     data->map.player_p.row = indx_x;
