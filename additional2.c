@@ -6,21 +6,11 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 09:50:10 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/27 15:38:31 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/27 17:19:27 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
-
-void	end_game(t_data *data)
-{
-	
-	int	door_r;
-	int	door_c;
-
-	get_element_position(data->map_tab, &door_r, &door_c, 'E');
-	data->map_tab[door_r][door_c] = 'O';
-}
 
 int check_for_walls(char **map)
 {
@@ -91,7 +81,7 @@ int check_for_valid_map(char **map)
             test = 1;
             i++;
     }
-    if (check_for_equal_walls(map))
+    if (check_for_equal_walls(map) && check_for_duplicate(map))
     {
         if (test && check_for_invalid_chr(map) && check_for_walls(map))
             return (1);
@@ -115,6 +105,13 @@ int check_for_equal_walls(char **map)
         len = l_strlen(map[i]);
         i++;
     }
+    return (1);
+}
+
+int check_for_duplicate(char **map)
+{
+    if (duplicate(map, 'P') || duplicate(map, 'E'))
+        return (0);     
     return (1);
 }
 

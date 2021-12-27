@@ -6,7 +6,7 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 09:13:55 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/27 14:01:01 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/27 17:11:09 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,15 @@ int l_strlen(char *str)
 	while (str[i] && str[i] != '\n')
 		i++;
 	return (i);
+}
+
+
+void	end_game(t_data *data)
+{
+	
+	int	door_r;
+	int	door_c;
+
+	get_element_position(data->map_tab, &door_r, &door_c, 'E');
+	data->map_tab[door_r][door_c] = 'O';
 }

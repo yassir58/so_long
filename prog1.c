@@ -6,7 +6,7 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 09:04:45 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/27 14:30:58 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/27 17:33:57 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	main(int argc, char *argv[])
 	t_data	data;
 	char	**map_tab ;
 	int test = 0;
-
+	if (!check_for_valid_file(argv[argc - 1]))
+		ft_putstr_fd("Invalid map file!", 2);
 	map_tab = extract_map(argv[argc - 1]);
 	test = check_for_valid_map(map_tab);
 	if (test)

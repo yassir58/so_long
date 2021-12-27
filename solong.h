@@ -6,7 +6,7 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 10:14:07 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/27 15:38:41 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/27 19:09:13 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,4 +144,7 @@ int handle_element_right(t_data *data, int indx_x, int indx_y);
 int handle_element_left(t_data *data, int indx_x, int indx_y);
 int handle_element_up(t_data *data, int indx_x, int indx_y);
 int handle_element_down(t_data *data, int indx_x, int indx_y);
+int duplicate(char **map, char c);
+int check_for_duplicate(char **map);
+int check_for_valid_file(char *str);
 #endif

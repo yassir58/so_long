@@ -6,7 +6,7 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 12:49:10 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/27 11:01:13 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/27 15:55:54 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	init_images(t_img *elm, t_img *e_space, t_img *coin, t_data *data)
 	space.x = 0;
 	space.y = 0;
 	elm->mlx_img = mlx_xpm_file_to_image(data->mlx,
-			"assets/monster.xpm", &elm_size, &elm_size);
+			"assets/pl_run1.xpm", &elm_size, &elm_size);
 	elm->addr = mlx_get_data_addr(elm->mlx_img,
 			&elm->bpp, &elm->line_len, &elm->endian);
 	coin->mlx_img = mlx_xpm_file_to_image(data->mlx,
