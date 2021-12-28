@@ -6,7 +6,7 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 09:13:55 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/27 17:11:09 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/28 14:08:33 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int l_strlen(char *str)
+int	l_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] && str[i] != '\n')
@@ -85,10 +85,8 @@ int l_strlen(char *str)
 	return (i);
 }
 
-
 void	end_game(t_data *data)
-{
-	
+{	
 	int	door_r;
 	int	door_c;
 

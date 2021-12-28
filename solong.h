@@ -6,7 +6,7 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 10:14:07 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/28 11:32:34 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/28 14:54:30 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # define BUTTON_PRESS 4
 # define TRUE 1
 # define FALSE 0
-
 
 typedef struct s_img
 {
@@ -136,16 +135,17 @@ void	init_images_(t_img *wall, t_img *c_door, t_img *o_door, t_data *data);
 void	display_image(t_data *data, t_vars variables);
 void	init_enemy(t_img *enemy, t_data *data);
 void	player_dead(t_data *data, int indx_x, int indx_y);
-int check_for_valid_map(char **map);
-int check_for_invalid_chr(char **map);
-int check_for_walls(char **map);
-int check_for_equal_walls(char **map);
-int l_strlen(char *str);
-int handle_element_right(t_data *data, int indx_x, int indx_y);
-int handle_element_left(t_data *data, int indx_x, int indx_y);
-int handle_element_up(t_data *data, int indx_x, int indx_y);
-int handle_element_down(t_data *data, int indx_x, int indx_y);
-int duplicate(char **map, char c);
-int check_for_duplicate(char **map);
-int check_for_valid_file(char *str);
+int		check_for_valid_map(char **map);
+int		check_for_invalid_chr(char **map);
+int		check_for_walls(char **map);
+int		check_for_equal_walls(char **map);
+int		l_strlen(char *str);
+int		handle_element_right(t_data *data, int indx_x, int indx_y);
+int		handle_element_left(t_data *data, int indx_x, int indx_y);
+int		handle_element_up(t_data *data, int indx_x, int indx_y);
+int		handle_element_down(t_data *data, int indx_x, int indx_y);
+int		duplicate(char **map, char c);
+int		check_for_duplicate(char **map);
+int		check_for_valid_file(char *str);
+int		validate_map(char **map, char *str);
 #endif

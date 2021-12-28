@@ -6,7 +6,7 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 12:31:38 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/27 15:38:14 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/28 11:58:03 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	move_up(t_data *data)
 	}
 	else if (data->map_tab[indx_x - 1][indx_y] == 'C')
 		handle_element_up(data, indx_x, indx_y);
-	else if (data->map_tab[indx_x - 1][indx_y] == 'I')
-		player_dead(data, indx_x, indx_y);
 	else if (data->map_tab[indx_x - 1][indx_y] == 'O')
 		player_dead(data, indx_x, indx_y);
 	get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
@@ -49,8 +47,6 @@ void	move_down(t_data *data)
 	}
 	else if (data->map_tab[indx_x + 1][indx_y] == 'C')
 		handle_element_down(data, indx_x, indx_y);
-	else if (data->map_tab[indx_x + 1][indx_y] == 'I')
-		player_dead(data, indx_x, indx_y);
 	else if (data->map_tab[indx_x + 1][indx_y] == 'O')
 		player_dead(data, indx_x, indx_y);
 	get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
@@ -74,8 +70,6 @@ void	move_left(t_data *data)
 		handle_element_left(data, indx_x, indx_y);
 	else if (data->map_tab[indx_x][indx_y + 1] == 'O')
 		player_dead(data, indx_x, indx_y);
-	else if (data->map_tab[indx_x][indx_y + 1] == 'I')
-		player_dead(data, indx_x, indx_y);
 	get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
 	data->map.player_p.row = indx_x;
 	data->map.player_p.column = indx_y;
@@ -96,8 +90,6 @@ void	move_right(t_data *data)
 	else if (data->map_tab[indx_x][indx_y - 1] == 'C')
 		handle_element_right(data, indx_x, indx_y);
 	else if (data->map_tab[indx_x][indx_y - 1] == 'O')
-		player_dead(data, indx_x, indx_y);
-	else if (data->map_tab[indx_x][indx_y - 1] == 'I')
 		player_dead(data, indx_x, indx_y);
 	get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
 	data->map.player_p.row = indx_x;

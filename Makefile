@@ -11,5 +11,5 @@ $(NAME):
 clean:
 	rm -rf so_long
 run_test: $(NAME)
-	echo "programme starting ... " && ./so_long "test.ber"
+	echo "programme starting ... " && ./so_long "./test_maps/invalid.ber"
 re: clean all run_test

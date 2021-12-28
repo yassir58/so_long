@@ -6,7 +6,7 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 10:22:03 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/27 10:57:25 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/28 11:56:40 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,4 @@ void	display_image(t_data *data, t_vars v)
 		mlx_put_image_to_window(data->mlx, data->win, img.cd.mlx_img, v.x, v.y);
 	else if (data->map_tab[v.i][v.j] == 'O')
 		mlx_put_image_to_window(data->mlx, data->win, img.od.mlx_img, v.x, v.y);
-	else if (data->map_tab[v.i][v.j] == 'I')
-		mlx_put_image_to_window(data->mlx, data->win, img.en.mlx_img, v.x, v.y);
 }

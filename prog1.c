@@ -6,12 +6,11 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 09:04:45 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/28 11:33:20 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/28 14:56:53 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
-
 
 void	my_mlx_pixel_put(t_img img, int x, int y, int color)
 {
@@ -23,7 +22,7 @@ void	my_mlx_pixel_put(t_img img, int x, int y, int color)
 
 int	handle_keypress(int keysym, t_data *data)
 {
-	static int counter;
+	static int	counter;
 
 	if (keysym == XK_ESCAPE)
 	{
@@ -32,6 +31,8 @@ int	handle_keypress(int keysym, t_data *data)
 	}
 	if (data->map.game_over != TRUE)
 	{
+		ft_putnbr_fd(counter, 1);
+		ft_putstr_fd("\n", 1);
 		if (keysym == XK_UP)
 			counter += handle_move_up(data);
 		else if (keysym == XK_DOWN)
@@ -41,10 +42,10 @@ int	handle_keypress(int keysym, t_data *data)
 		else if (keysym == XK_RIGHT)
 			counter += handle_move_right(data);
 	}
-	printf ("counter : |%d|\n",counter);
 	return (0);
 }
-int handle_Leave(t_data *data)
+
+int	handle_leave(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
 	free(data->mlx);
@@ -80,18 +81,16 @@ int	main(int argc, char *argv[])
 	t_map	map;
 	t_data	data;
 	char	**map_tab ;
-	int test = 0;
-	if (!check_for_valid_file(argv[argc - 1]))
-		ft_putstr_fd("Invalid map file!", 2);
+	int		test;
+
 	map_tab = extract_map(argv[argc - 1]);
-	test = check_for_valid_map(map_tab);
-	if (test)
+	if (validate_map(map_tab, argv[argc - 1]))
 	{
 		init_map(&map, map_tab);
 		init_data(&data, map_tab, map);
 		draw_map(&data);
-		mlx_hook(data.win, KEY_PRESS, 1L << 0, &handle_keypress, &data);
-		mlx_hook(data.win, DESTROY_NOTIFY, (1L<<5), &handle_Leave, &data);
+		mlx_hook(data.win, KEY_PRESS, (1L << 0), &handle_keypress, &data);
+		mlx_hook(data.win, DESTROY_NOTIFY, (1L << 5), &handle_leave, &data);
 		mlx_loop(data.mlx);
 		free(map_tab);
 		free(data.mlx);
