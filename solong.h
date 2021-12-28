@@ -6,7 +6,7 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 10:14:07 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/27 19:09:13 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/28 11:32:34 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@
 # define XK_UP      126
 # define XK_RIGHT  	123 
 # define XK_DOWN   125
-# define KEY_PRESS 02
-# define BUTTON_PRESS 04
+# define KEY_PRESS 2
+# define DESTROY_NOTIFY 17
+# define BUTTON_PRESS 4
 # define TRUE 1
 # define FALSE 0
 
@@ -126,10 +127,10 @@ int		coin_count(char **map);
 void	end_game(t_data *data);
 void	init_data(t_data *data, char **map_tab, t_map map);
 void	init_map(t_map *map, char **map_tab);
-void	handle_move_up(t_data *data);
-void	handle_move_down(t_data *data);
-void	handle_move_left(t_data *data);
-void	handle_move_right(t_data *data);
+int		handle_move_up(t_data *data);
+int		handle_move_down(t_data *data);
+int		handle_move_left(t_data *data);
+int		handle_move_right(t_data *data);
 void	init_images(t_img *elm, t_img *e_space, t_img *coin, t_data *data);
 void	init_images_(t_img *wall, t_img *c_door, t_img *o_door, t_data *data);
 void	display_image(t_data *data, t_vars variables);
