@@ -6,7 +6,7 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 10:14:07 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/29 21:39:05 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/29 22:13:32 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 # define ELM_WIDTH 65
 # define BUFFER_SIZE 1
 # define XK_ESCAPE  53
-# define XK_LEFT    124
-# define XK_UP      126
-# define XK_RIGHT  	123 
-# define XK_DOWN   125
+# define XK_LEFT    2
+# define XK_UP     13
+# define XK_RIGHT  0
+# define XK_DOWN   1
 # define KEY_PRESS 2
 # define DESTROY_NOTIFY 17
 # define BUTTON_PRESS 4
@@ -149,5 +149,5 @@ int		duplicate(char **map, char c);
 int		check_for_duplicate(char **map);
 int		check_for_valid_file(char *str);
 int		validate_map(char **map, char *str);
-void		handle_game_over(t_data *data);
+void	handle_game_over(t_data *data);
 #endif

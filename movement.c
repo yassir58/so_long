@@ -6,7 +6,7 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 12:31:38 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/29 21:32:25 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/29 22:04:44 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,11 @@ void	move_right(t_data *data)
 
 void	player_dead(t_data *data, int indx_x, int indx_y)
 {
-	printf ("player dead\n");
+	int	i;
+
 	data->map_tab[indx_x][indx_y] = '0';
 	data->map.game_over = TRUE;
-	int i = 500000000;
+	i = 500000000;
 	while (i)
 		i--;
 	handle_game_over(data);
