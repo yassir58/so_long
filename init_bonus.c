@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 12:49:10 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/29 21:42:15 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/29 21:43:11 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_data(t_data *data, char **map_tab, t_map map)
 	data->map = map;
 	data->map_tab = map_tab;
 	data->map.game_over = FALSE ;
+	data->map.player_dead = FALSE ;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, win_w, win_h, "SO LONG");
 }

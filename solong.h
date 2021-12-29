@@ -6,7 +6,7 @@
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 10:14:07 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/28 14:54:30 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/29 21:39:05 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_map
 	t_elm_position	exit_p;
 	int				coin_count;
 	int				game_over;
+	int				player_dead;
 }	t_map;
 
 typedef struct s_data
@@ -148,4 +149,5 @@ int		duplicate(char **map, char c);
 int		check_for_duplicate(char **map);
 int		check_for_valid_file(char *str);
 int		validate_map(char **map, char *str);
+void		handle_game_over(t_data *data);
 #endif

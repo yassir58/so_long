@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement.c                                         :+:      :+:    :+:   */
+/*   movement_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelatman <yelatman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 12:31:38 by yelatman          #+#    #+#             */
-/*   Updated: 2021/12/29 21:32:25 by yelatman         ###   ########.fr       */
+/*   Updated: 2021/12/29 21:42:57 by yelatman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	move_up(t_data *data)
 	}
 	else if (data->map_tab[indx_x - 1][indx_y] == 'C')
 		handle_element_up(data, indx_x, indx_y);
+	else if (data->map_tab[indx_x - 1][indx_y] == 'I')
+		player_dead(data, indx_x, indx_y);
 	else if (data->map_tab[indx_x - 1][indx_y] == 'O')
 		player_dead(data, indx_x, indx_y);
 	get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
@@ -47,6 +49,8 @@ void	move_down(t_data *data)
 	}
 	else if (data->map_tab[indx_x + 1][indx_y] == 'C')
 		handle_element_down(data, indx_x, indx_y);
+	else if (data->map_tab[indx_x + 1][indx_y] == 'I')
+		player_dead(data, indx_x, indx_y);
 	else if (data->map_tab[indx_x + 1][indx_y] == 'O')
 		player_dead(data, indx_x, indx_y);
 	get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
@@ -68,6 +72,8 @@ void	move_left(t_data *data)
 	}
 	else if (data->map_tab[indx_x][indx_y + 1] == 'C')
 		handle_element_left(data, indx_x, indx_y);
+	else if (data->map_tab[indx_x][indx_y + 1] == 'I')
+		player_dead(data, indx_x, indx_y);
 	else if (data->map_tab[indx_x][indx_y + 1] == 'O')
 		player_dead(data, indx_x, indx_y);
 	get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
@@ -89,6 +95,8 @@ void	move_right(t_data *data)
 	}
 	else if (data->map_tab[indx_x][indx_y - 1] == 'C')
 		handle_element_right(data, indx_x, indx_y);
+	else if (data->map_tab[indx_x][indx_y - 1] == 'I')
+		player_dead(data, indx_x, indx_y);
 	else if (data->map_tab[indx_x][indx_y - 1] == 'O')
 		player_dead(data, indx_x, indx_y);
 	get_element_position(data->map_tab, &indx_x, &indx_y, 'P');
@@ -101,6 +109,7 @@ void	player_dead(t_data *data, int indx_x, int indx_y)
 	printf ("player dead\n");
 	data->map_tab[indx_x][indx_y] = '0';
 	data->map.game_over = TRUE;
+	data->map.player_dead = TRUE;
 	int i = 500000000;
 	while (i)
 		i--;
